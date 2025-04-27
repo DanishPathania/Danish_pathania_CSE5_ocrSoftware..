@@ -33,7 +33,7 @@ Seamless Integration – Ensure the extracted data is compatible with business s
 # 🔥 Motivation
 In today's digital world, organizations handle a vast array of documents daily, including handwritten, scanned, printed, and digital files. Manually extracting data from these documents is time-consuming and prone to errors. Particularly in industries such as finance, healthcare, legal, education, and government, the growing complexity of information demands efficient, intelligent solutions for document processing.
 
-🕵️ Gap Analysis
+# 🕵️ Gap Analysis
 This project addresses a critical gap in the current market by offering a user-friendly, centralized OCR web application that:
 
 Allows users to easily upload images and extract text.

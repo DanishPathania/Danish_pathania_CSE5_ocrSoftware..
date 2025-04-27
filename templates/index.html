@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OCR System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #031c28, #073563);
+      color: #f3f3f3;
+      padding: 40px 20px;
+    }
+
+    h2, h3 {
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+
+    .upload-form {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    form {
+      background: rgba(232, 232, 232, 0.05);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      animation: slideUp 1s ease;
+    }
+
+    input[type="file"], input[type="text"], textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 300px;
+    }
+
+    button {
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0, 198, 255, 0.6);
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+
+    .left-box, .right-box {
+      flex: 1;
+      min-width: 300px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 25px;
+      position: relative;
+    }
+
+    .center-box {
+      flex-basis: 100%;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .icon {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 2em;
+      opacity: 0.2;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 600px;
+    }
+
+    li {
+      background: rgba(255,255,255,0.08);
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 8px;
+      animation: fadeIn 1s ease;
+    }
+
+    pre {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      font-family: monospace;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0 }
+      to { opacity: 1 }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    #button{
+      position: absolute;
+      top: 0px;
+      right: 0px;
+    }
+  </style>
+</head>
+<body>
+  <a id="button" href="{{ url_for('logout') }}">
+    <button type="button">Logout</button>
+</a>
+  <h2>📄 Upload Image for OCR</h2>
+  
+
+
+  <div class="upload-form">
+    <form method="POST" enctype="multipart/form-data">
+      <input type="file" name="image" required>
+      <button type="submit">Extract Text</button>
+    </form>
+  </div>
+
+  <div class="container">
+    <!-- LEFT BOX: Extracted Text -->
+    <div class="left-box">
+    <div class="icon">📂</div>
+      {% if text %}
+        <h3>📝 Extracted Text</h3>
+        <form action="/save" method="POST">
+          <textarea name="text" placeholder="Edit the extracted text...">{{ text }}</textarea>
+          <input type="text" name="number" placeholder="Save as Number" required>
+          <button type="submit">💾 Save</button>
+        </form>
+      {% else %}
+        <p>No extracted text yet.</p>
+      {% endif %}
+    </div>
+
+    <!-- RIGHT BOX: Search -->
+    <div class="right-box">
+    <div class="icon">🔍📁</div>
+      <h3>🔍 Search by Number</h3>
+      <form method="POST" action="/search">
+        <input type="text" name="search_number" placeholder="Enter number to search" required>
+        <button type="submit">Search</button>
+      </form>
+
+      {% if result %}
+        <h3>🔎 Search Result:</h3>
+        <pre>{{ result }}</pre>
+      {% endif %}
+    </div>
+
+    <!-- CENTER BOX: Saved Entries -->
+    <div class="center-box">
+      <h3>📚 Saved Entries</h3>
+      <ul>
+        {% for key, value in saved_data.items() %}
+          <li><strong>{{ key }}:</strong> {{ value[:50] }}...</li>
+        {% endfor %}
+      </ul>
+
+      {% if image %}
+        <h3>🖼 Uploaded Image:</h3>
+        <img src="{{ url_for('static', filename='uploads/' + image) }}">
+      {% endif %}
+    </div>
+  </div>
+
+</body>
+</html>

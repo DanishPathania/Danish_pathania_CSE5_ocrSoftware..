@@ -1,0 +1,238 @@
+<!-- <!DOCTYPE html>
+<html>
+<head><title>Register</title></head>
+<body>
+    <h2>Register</h2>
+    <form method="POST">
+        Username: <input name="username" required><br>
+        Password: <input type="password" name="password" required><br>
+        <button type="submit">Register</button>
+    </form>
+    <a href="{{ url_for('login') }}">Already have an account? Login</a>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, msg in messages %}
+        <p>{{ msg }}</p>
+      {% endfor %}
+    {% endwith %}
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Signup Page</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-color: #f8f8f8;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 95%;
+            max-width: 1200px;
+            background-color: #f2f0f0;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .form-section,
+        .image-section {
+            width: 50%;
+            padding: 50px;
+        }
+
+        .form-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-section h1 {
+            font-size: 48px;
+            font-weight: bold;
+            color: #413e3e;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .form-section p {
+            color: #777;
+            margin-bottom: 20px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .signup-btn {
+            width: 100%;
+            background-color: #6a4bc5;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .signup-btn:hover {
+            background-color: #5538a5;
+        }
+
+        .signin-link {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        .signin-link a {
+            color: #6a4bc5;
+            text-decoration: none;
+        }
+
+        .image-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+        }
+
+        .image-section img {
+            width: 80%;
+            max-width: 1000px;
+        }
+
+        .top-left-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .top-left-logo i {
+            font-size: 30px;
+            color: #6a4bc5;
+        }
+
+        @media screen and (max-width: 768px) {
+            .form-section,
+            .image-section {
+                width: 100%;
+                padding: 30px;
+                text-align: center;
+            }
+
+            .form-section h1 {
+                font-size: 36px;
+            }
+
+            .signup-btn {
+                font-size: 18px;
+                padding: 12px;
+            }
+
+            .top-left-logo {
+                position: static;
+                margin-bottom: 20px;
+            }
+
+            .image-section img {
+                width: 60%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-left-logo">
+        <a href="{{ url_for('index') }}"><i class="fas fa-house"></i></a>
+    </div>
+
+    <div class="container">
+        <div class="form-section">
+            <h1>Register Here</h1>
+            <p>Create a free account</p>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% for category, message in messages %}
+                <p style="color: red;">{{ message }}</p>
+              {% endfor %}
+            {% endwith %}
+
+            <form method="POST" action="">
+                <div class="form-group">
+                    <label><strong>Username</strong> <span style="color: red;">*</span></label>
+                    <input type="text" name="username" placeholder="Choose a username" required>
+                </div>
+
+                <div class="form-group">
+                    <label><strong>Password</strong> <span style="color: red;">*</span></label>
+                    <input type="password" name="password" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label><strong>email</strong> <span style="color: red;">*</span></label>
+                    <input type="email" name="email" placeholder="Enter Your Email" required>
+                </div>
+
+                <div class="form-group">
+                    <label><strong>Gender</strong></label>
+                    <select>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    <input type="date">
+                </div>
+
+                <button type="submit" class="signup-btn">Sign up</button>
+                <p class="signin-link">Already have an account? <a href="{{ url_for('login') }}">Sign in</a></p>
+            </form>
+        </div>
+
+        <div class="image-section">
+            <img src="https://img.freepik.com/free-vector/access-control-system-abstract-concept_335657-3180.jpg" alt="Illustration">
+        </div>
+        <!-- <div class="form-group">
+          <label><input type="checkbox" name="is_admin"> Register as Admin</label>
+      </div> -->
+    </div>
+</body>
+</html>
+

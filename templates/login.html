@@ -1,0 +1,283 @@
+<!-- <!DOCTYPE html>
+<html>
+<head><title>Login</title></head>
+<body>
+    <h2>Login</h2>
+    <form method="POST">
+        Username: <input name="username" required><br>
+        Password: <input type="password" name="password" required><br>
+        <button type="submit">Login</button>
+    </form>
+    <a href="{{ url_for('register') }}">New user? Register</a>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, msg in messages %}
+        <p>{{ msg }}</p>
+      {% endfor %}
+    {% endwith %}
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background: linear-gradient(to right bottom, #ffffff, #ffffff);
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 95%;
+            max-width: 1000px;
+            background-color: #e4e4e4;
+            border-radius: 50px;
+            box-shadow: 1px 1px 30px 3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: fadeInScale 0.8s ease-in-out forwards;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .form-section {
+            width: 50%;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .image-section {
+            width: 50%;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .image-section img {
+            width: 100%;
+            height: auto;
+            border-radius: 0 50px 50px 0;
+        }
+
+        .top-left-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .top-left-logo i {
+            font-size: 30px;
+            color: #6a4bc5;
+        }
+
+        h1 {
+            font-size: 50px;
+            font-weight: bold;
+            color: #413e3e;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        p {
+            color: #777;
+            margin-bottom: 20px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .login-btn {
+            width: 100%;
+            background-color: #6a4bc5;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background-color: #5538a5;
+        }
+
+        .signin-link {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        .signin-link a {
+            color: #6a4bc5;
+            text-decoration: none;
+        }
+
+        .google-btn {
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+            margin: 10px auto 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 50px;
+        }
+
+        .google-btn img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .google-btn:hover {
+            background: #f0f0f0;
+        }
+
+        @media screen and (max-width: 768px) {
+            .form-section, .image-section {
+                width: 100%;
+                padding: 30px;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            .top-left-logo {
+                position: static;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="top-left-logo">
+        <a href="{{ url_for('index') }}"><i class="fas fa-house"></i></a>
+    </div>
+    <div class="container">
+        <div class="form-section">
+            <h1>Sign in</h1>
+            <p>Welcome back! Please login to your account</p>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% for category, message in messages %}
+                <p style="color: red;">{{ message }}</p>
+              {% endfor %}
+            {% endwith %}
+
+            <form action="{{ url_for('login') }}" method="POST">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            
+            <p class="signin-link">Don't have an account? <a href="{{ url_for('register') }}">Sign up</a></p>
+            <br>
+            <p>Are you an admin? <a href="{{ url_for('admin_login') }}">Login as Admin</a></p>
+        </div>
+        
+        <div class="image-section">
+            <img src="https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7962.jpg" alt="Illustration">
+            
+        </div>
+        
+       
+            <!-- // This gets rendered by Jinja
+
+        // document.querySelector('.signin-link').addEventListener('click', function(event) {
+        //     event.preventDefault();
+        //     const adminPassword = prompt("Enter the admin password:");
+        //     if (adminPassword === "your_admin_password") { // Replace with your real password
+        //         window.location.href = adminUrl;
+        //     } else {
+        //         alert("Incorrect password!");
+        //     }
+        // }); -->
+        </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Registered Users</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+        .back-button {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .back-button a {
+            font-size: 16px;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background-color: #6a4bc5;
+            transition: background-color 0.3s ease;
+        }
+        .back-button a:hover {
+            background-color: #5439a6;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #6a4bc5;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .logout-button {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .logout-button a {
+            font-size: 16px;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background-color: #e63946;
+            transition: background-color 0.3s ease;
+        }
+        .logout-button a:hover {
+            background-color: #c72c3b;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Registered Users</h2>
+<div class="back-button">
+    <a href="/login">← Go back to User Login</a>
+</div>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+  </tr>
+  {% for user in users %}
+  <tr>
+    <td>{{ user['username'] }}</td>
+    <td>{{ user['email'] }}</td>
+  </tr>
+  {% endfor %}
+</table>
+<div class="logout-button">
+    <a href="/admin_logout">Logout</a>
+</div>
+
+</body>
+</html>

@@ -12,7 +12,7 @@ This web-based OCR application enables users to upload scanned documents, automa
 
 # 🎥 Video Demonstration
 Watch the project walkthrough here:
-👉 OCR Software - Video Presentation(https://youtu.be/q79yhdTzLVU?si=a1WWiOUljoeRJEJy)
+👉 OCR Software - Video Presentation(https://youtu.be/gM9yvKyvZbQ?si=E9QKlz3gOpe41KuR)
 
 # 📚 Project Overview
 The Advanced OCR for Multi-Document Data Extraction project seeks to develop an intelligent system capable of recognizing, extracting, and processing both structured and unstructured data from diverse document types, such as invoices, receipts, contracts, and forms. Leveraging state-of-the-art OCR techniques integrated with machine learning (ML) and natural language processing (NLP), this system enhances document quality, identifies key data fields (e.g., dates, names, amounts), and converts printed or handwritten text into structured digital formats.
